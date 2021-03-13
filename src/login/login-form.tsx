@@ -17,11 +17,12 @@ export function LoginForm() {
                     justify="center">
                     <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>                    
                 </Grid>
-                <Grid
-                    container
-                    justify="center">
-                    <h2>Sign In</h2>
-                </Grid>    
+                <Typography
+                  component="h2"
+                  variant="h5"
+                  align="center">
+                    Sign In
+                </Typography>    
                 <TextField id="email" label="Email" placeholder="Enter email" fullWidth required/>
                 <TextField id="password" label="Password" placeholder="Enter password" type="password" fullWidth required/>
                 <FormControlLabel
