@@ -22,8 +22,8 @@ export function LoginForm() {
                     justify="center">
                     <h2>Sign In</h2>
                 </Grid>    
-                <TextField label="Username" placeholder="Enter username" fullWidth required/>
-                <TextField label="Password" placeholder="Enter password" type="password" fullWidth required/>
+                <TextField id="email" label="Email" placeholder="Enter email" fullWidth required/>
+                <TextField id="password" label="Password" placeholder="Enter password" type="password" fullWidth required/>
                 <FormControlLabel
                     control={
                         <Checkbox color="primary" />        
