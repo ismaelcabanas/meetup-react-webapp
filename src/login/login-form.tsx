@@ -22,16 +22,18 @@ export function LoginForm() {
                   variant="h5"
                   align="center">
                     Sign In
-                </Typography>    
-                <TextField id="email" label="Email" placeholder="Enter email" fullWidth required/>
-                <TextField id="password" label="Password" placeholder="Enter password" type="password" fullWidth required/>
-                <FormControlLabel
-                    control={
-                        <Checkbox color="primary" />        
-                    }
-                    label="Remember me"
-                />
-                <Button type="submit" color="primary" variant="contained" style={btnStyle} fullWidth>Sign in</Button>
+                </Typography> 
+                <form data-testid='form'>                
+                    <TextField id="email" label="Email" placeholder="Enter email" fullWidth required/>
+                    <TextField id="password" label="Password" placeholder="Enter password" type="password" fullWidth required/>
+                    <FormControlLabel
+                        control={
+                            <Checkbox color="primary" />        
+                        }
+                        label="Remember me"
+                    />
+                    <Button name="signin" type="submit" color="primary" variant="contained" style={btnStyle} fullWidth>Sign in</Button>
+                </form>       
                 <Typography>
                     <Link href="#">Forgot password?</Link>
                 </Typography>
