@@ -1,48 +1,46 @@
-import React from 'react';
-import { Grid, Paper, Avatar, TextField, Button, FormControlLabel, Checkbox, Typography, Link } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { green } from '@material-ui/core/colors';
+import { ChangeEvent, FormEvent, useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
-export function LoginForm() {
+type LoginData = {
+    email: string;
+    password: string;
+};
 
-    const paperStyle = {padding: 20, height:'70vh', width:280, margin:"20px auto"};
-    const avatarStyle = {backgroundColor: '#1bbd7e'};
-    const btnStyle = {margin: "8px 0"};
+export default function LoginForm() {
+    const { register, errors, handleSubmit } = useForm<LoginData>();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    const onSubmit = (data: LoginData) => {
+        alert(JSON.stringify(data));
+      };
 
     return (
-        <Grid>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid 
-                    container
-                    justify="center">
-                    <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>                    
-                </Grid>
-                <Typography
-                  component="h2"
-                  variant="h5"
-                  align="center">
-                    Sign In
-                </Typography> 
-                <form data-testid='form'>                
-                    <TextField id="email" label="Email" placeholder="Enter email" fullWidth required/>
-                    <TextField id="password" label="Password" placeholder="Enter password" type="password" fullWidth required/>
-                    <FormControlLabel
-                        control={
-                            <Checkbox color="primary" />        
-                        }
-                        label="Remember me"
-                    />
-                    <Button name="signin" type="submit" color="primary" variant="contained" style={btnStyle} fullWidth>Sign in</Button>
-                </form>       
-                <Typography>
-                    <Link href="#">Forgot password?</Link>
-                </Typography>
-                <Typography> Don't you have an account? 
-                    <Link href="#"> Sign up </Link>
-                </Typography>
-            </Paper>        
-        </Grid>
-    )
-}
+        <div>
+            {errorMessage !== null &&
+                <div>{errorMessage}</div>
+            }
 
-export default LoginForm;
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <div>Login: </div>
+                    <div>
+                        <input 
+                            name="email"
+                            type="text" 
+                            ref={register({required: true})} />
+                    </div>
+                    <div>Password: </div>
+                    <div>
+                        <input 
+                            name="password"
+                            type="password" 
+                            autoComplete="password" 
+                            ref={register({required: true})} />
+                    </div>
+                    <div><input type="submit" value="Log in" /></div>
+                </div>
+            </form>
+        </div>
+    );
+}
