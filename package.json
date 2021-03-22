@@ -47,6 +47,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/jest-axe": "^3.5.1",
+    "@types/react-router-dom": "^5.1.7",
+    "jest-axe": "^4.1.0"
   }
 }

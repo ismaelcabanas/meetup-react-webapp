@@ -1,10 +1,12 @@
 import React from 'react';
 import "@testing-library/jest-dom";
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { axe } from "jest-axe";
 import { LoginForm } from './login-form';
-import userEvent from '@testing-library/user-event'
 
 describe('Login render page', () => {
+    
     it('renders the login page', () => {
         render(<LoginForm />);
 
@@ -26,6 +28,12 @@ describe('Login render page', () => {
         
         expect(getByLabelText(/email/i)).toBeInTheDocument();
         expect(getByLabelText(/password/i)).toBeInTheDocument();
+    });
+    
+    it("should be accessible", () => {
+        const { container } = render(<LoginForm />);
+
+        expect(axe(container)).toHaveNoViolations;
     });
   });
 
