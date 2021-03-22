@@ -1,4 +1,5 @@
 import React from 'react';
+import "@testing-library/jest-dom";
 import { render, screen } from '@testing-library/react';
 import { LoginForm } from './login-form';
 import userEvent from '@testing-library/user-event'
@@ -35,10 +36,11 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/email/i), '');
         userEvent.type(screen.getByLabelText(/password/i), '');
 
-        userEvent.click(screen.getByRole('button', {name: /sign in/i}))
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        userEvent.click(signInButton)
         
-        expect(screen.getByText("Email is required")).toBeInTheDocument();
-        expect(screen.getByText("Password is required")).toBeInTheDocument();
+        expect(await screen.findByText(/Email is required./)).toBeInTheDocument();        
+        expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
     });
 
 });  
