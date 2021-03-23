@@ -45,10 +45,22 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), '');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton)
+        userEvent.click(signInButton);
         
         expect(await screen.findByText(/Email is required./)).toBeInTheDocument();        
         expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
     });
 
+    it('submit the form when fill it successfully', async () => {
+        render(<LoginForm />)
+
+        userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        userEvent.click(signInButton);
+        
+        expect(screen.queryByText(/Email is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();
+    });
 });  
