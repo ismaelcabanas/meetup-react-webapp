@@ -38,18 +38,59 @@ describe('Login render page', () => {
   });
 
 describe("Form behaviour",  () => {
-    it('validate user inputs, and provides error messages', async () => {
+    it('should display an error message when the user submits empty email', async () => {
         render(<LoginForm />)
 
         userEvent.type(screen.getByLabelText(/email/i), '');
-        userEvent.type(screen.getByLabelText(/password/i), '');
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
         userEvent.click(signInButton);
         
         expect(await screen.findByText(/Email is required./)).toBeInTheDocument();        
+    });
+
+    it('should display an error message when the user submits empty password', async () => {
+        render(<LoginForm />)
+
+        userEvent.type(screen.getByLabelText(/email/i), 'user');
+        userEvent.type(screen.getByLabelText(/password/i), '');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        userEvent.click(signInButton);
+        
         expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
     });
+
+    it('should hide error message when user fix the email and submit again', async () => {
+        render(<LoginForm />)
+
+        userEvent.type(screen.getByLabelText(/email/i), '');
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        userEvent.click(signInButton);
+        
+        userEvent.type(screen.getByLabelText(/email/i), 'user');
+        userEvent.click(signInButton);
+
+        expect(screen.queryByText(/Email is required./)).not.toBeInTheDocument();           
+    });
+
+    it('should hide error message when user fix the password and submit again', async () => {
+        render(<LoginForm />)
+
+        userEvent.type(screen.getByLabelText(/email/i), 'user');
+        userEvent.type(screen.getByLabelText(/password/i), '');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        userEvent.click(signInButton);
+        
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
+        userEvent.click(signInButton);
+
+        expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();           
+    });    
 
     it('submit the form when fill it successfully', async () => {
         render(<LoginForm />)
