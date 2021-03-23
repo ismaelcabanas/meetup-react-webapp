@@ -1,6 +1,6 @@
 import React from 'react';
 import "@testing-library/jest-dom";
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from "jest-axe";
 import { LoginForm } from './login-form';
@@ -58,8 +58,10 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), 'test');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton);
-        
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
+                
         expect(screen.queryByText(/Email is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();
     });
