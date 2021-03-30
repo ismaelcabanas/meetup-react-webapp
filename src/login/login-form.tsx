@@ -1,19 +1,37 @@
-import { ChangeEvent, FormEvent, useState } from "react";
 import React from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthenticationResult } from "./services/authenticationResult";
+import { AuthenticationService } from "./services/authenticationService";
+import { HttpClient } from "../shared/http-client";
 
 type LoginData = {
     email: string;
     password: string;
 };
 
+
 export function LoginForm() {
     const { register, errors, handleSubmit } = useForm<LoginData>();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const onSubmit = (data: LoginData) => {
-        alert(JSON.stringify(data));
-      };
+    function onSubmit(event: FormEvent<HTMLFormElement>) {
+        var formdata = new FormData();
+        formdata.append("username", email);
+        formdata.append("password", password);
+        HttpClient.postForm<AuthenticationResult>("", formdata)
+            .then(data => AuthenticationService.authenticate(data, email));        
+    }
+
+    function handleLoginChange(event: ChangeEvent<HTMLInputElement>) {
+        setEmail(event.target.value)
+    }
+
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
+        setPassword(event.target.value);
+    }
 
     return (
         <div>
@@ -32,7 +50,8 @@ export function LoginForm() {
                             id="email"
                             name="email"
                             type="text" 
-                            ref={register({required: true})} />
+                            ref={register({required: true})} 
+                            onChange={handleLoginChange} />
                     </div>
 
                     {errors.email && errors.email.type === "required" && (
@@ -46,7 +65,8 @@ export function LoginForm() {
                             name="password"
                             type="password" 
                             autoComplete="password" 
-                            ref={register({required: true})} />
+                            ref={register({required: true})} 
+                            onChange={handlePasswordChange} />
                     </div>
 
                     {errors.password && errors.password.type === "required" && (

@@ -45,7 +45,9 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), 'test');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
         
         expect(await screen.findByText(/Email is required./)).toBeInTheDocument();        
     });
@@ -57,7 +59,9 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), '');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
         
         expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
     });
@@ -69,10 +73,14 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), 'test');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
         
         userEvent.type(screen.getByLabelText(/email/i), 'user');
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
 
         expect(screen.queryByText(/Email is required./)).not.toBeInTheDocument();           
     });
@@ -84,10 +92,14 @@ describe("Form behaviour",  () => {
         userEvent.type(screen.getByLabelText(/password/i), '');
 
         const signInButton = screen.getByRole('button', {name: /sign in/i});
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
         
         userEvent.type(screen.getByLabelText(/password/i), 'test');
-        userEvent.click(signInButton);
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
 
         expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();           
     });    
@@ -106,4 +118,24 @@ describe("Form behaviour",  () => {
         expect(screen.queryByText(/Email is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();
     });
+
+    it("add token to localstorage when user logs in successfully", async () => {
+        const data = {
+            "email": "test@test.com",
+            "password": "test"
+        };
+        
+        render(<LoginForm />)
+
+        userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
+        
+        expect(window.localStorage.getItem('access_token')).toEqual('myToken');        
+    });
+  
 });  
