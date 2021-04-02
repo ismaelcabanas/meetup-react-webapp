@@ -1,13 +1,21 @@
 import { AuthenticationResult } from "./authenticationResult";
 import { LoginConsts } from "./login-consts";
+import StorageRepository from '../repository/StorageRepository';
 
 export class AuthenticationService {
+    storageRepository: StorageRepository
 
-    public static authenticate(
+    constructor(storageRepository: StorageRepository) {
+        this.storageRepository = storageRepository
+    }
+
+    public authenticate(
         authenticationResult: AuthenticationResult,
         login: string) : void {
-            window.localStorage.setItem(LoginConsts.ACCESS_TOKEN_KEY, authenticationResult.access_token);
-            window.localStorage.setItem(LoginConsts.USERNAME_KEY, login);
+            this.storageRepository.save(LoginConsts.ACCESS_TOKEN_KEY, authenticationResult.access_token)
+            this.storageRepository.save(LoginConsts.USERNAME_KEY, login)
+            //window.localStorage.setItem(LoginConsts.ACCESS_TOKEN_KEY, authenticationResult.access_token);
+            //window.localStorage.setItem(LoginConsts.USERNAME_KEY, login);
     }
 
     public static isAuthenticated() : boolean {
