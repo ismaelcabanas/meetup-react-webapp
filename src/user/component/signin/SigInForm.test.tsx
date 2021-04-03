@@ -102,4 +102,19 @@ describe("Sign in form behaviour",  () => {
         expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();           
     });    
 
+    it('submit the form when fill it successfully', async () => {
+        render(<SignInForm />)
+
+        userEvent.type(screen.getByLabelText(/username/i), 'test@test.com');
+        userEvent.type(screen.getByLabelText(/password/i), 'test');
+
+        const signInButton = screen.getByRole('button', {name: /sign in/i});
+        await act (async () => {
+            userEvent.click(signInButton);
+        });
+                
+        expect(screen.queryByText(/Username is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();
+    });
+
 });      
