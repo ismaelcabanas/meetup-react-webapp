@@ -1,7 +1,7 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-import SignInUseCase from "../../application/sigin/SignInUseCase";
+import SignInUseCase from "../../application/signin/SignInUseCase";
 
 type LoginData = {
     username: string;
