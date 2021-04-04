@@ -71,16 +71,14 @@ describe("Sign in form behaviour",  () => {
 
     it('should hide error message when user fix the username and submit again', async () => {
         render(<SignInForm signInUseCase={mockSignInUseCase}/>)
-
         userEvent.type(screen.getByLabelText(/username/i), '');
         userEvent.type(screen.getByLabelText(/password/i), 'test');
-
         const signInButton = screen.getByRole('button', {name: /sign in/i});
         await act (async () => {
             userEvent.click(signInButton);
-        });
-        
+        });        
         userEvent.type(screen.getByLabelText(/username/i), 'user');
+        
         await act (async () => {
             userEvent.click(signInButton);
         });
@@ -90,16 +88,14 @@ describe("Sign in form behaviour",  () => {
 
     it('should hide error message when user fix the password and submit again', async () => {
         render(<SignInForm signInUseCase={mockSignInUseCase}/>)
-
         userEvent.type(screen.getByLabelText(/username/i), 'user');
         userEvent.type(screen.getByLabelText(/password/i), '');
-
         const signInButton = screen.getByRole('button', {name: /sign in/i});
         await act (async () => {
             userEvent.click(signInButton);
-        });
-        
+        });        
         userEvent.type(screen.getByLabelText(/password/i), 'test');
+        
         await act (async () => {
             userEvent.click(signInButton);
         });
@@ -109,11 +105,10 @@ describe("Sign in form behaviour",  () => {
 
     it('submit the form when fill it successfully', async () => {
         render(<SignInForm signInUseCase={mockSignInUseCase}/>)
-
         userEvent.type(screen.getByLabelText(/username/i), 'test@test.com');
         userEvent.type(screen.getByLabelText(/password/i), 'test');
-
         const signInButton = screen.getByRole('button', {name: /sign in/i});
+        
         await act (async () => {
             userEvent.click(signInButton);
         });
@@ -122,13 +117,12 @@ describe("Sign in form behaviour",  () => {
         expect(screen.queryByText(/Password is required./)).not.toBeInTheDocument();
     });
 
-    it("execute sigin use case user sign in successfully", async () => {        
+    it("execute use case user sign in successfully", async () => {        
         render(<SignInForm signInUseCase={mockSignInUseCase}/>)
-
         userEvent.type(screen.getByLabelText(/username/i), 'test@test.com');
         userEvent.type(screen.getByLabelText(/password/i), 'test');
-
         const signInButton = screen.getByRole('button', {name: /sign in/i});
+        
         await act (async () => {
             userEvent.click(signInButton);
         });

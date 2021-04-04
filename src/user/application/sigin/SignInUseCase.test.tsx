@@ -1,7 +1,7 @@
 import StorageRepository from '../../domain/StorageRepository';
 import AuthenticationService from '../../domain/AuthenticationService';
 import SignInUseCase from './SignInUseCase';
-import { AuthenticationResult } from '../../../login/services/authenticationResult';
+import { AuthenticationResult } from '../../domain/AuthenticationResult';
 
 
 describe('Signin use case', () => {
