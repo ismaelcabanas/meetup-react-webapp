@@ -1,19 +1,25 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import SignInUseCase from "../../application/sigin/SignInUseCase";
 
 type LoginData = {
     username: string;
     password: string;
 };
 
-export function SignInForm() {
+interface SignInFormProps {
+    signInUseCase: SignInUseCase
+}
+
+export function SignInForm(props: SignInFormProps) {
     const { register, errors, handleSubmit } = useForm<LoginData>();
+    const { signInUseCase } = props
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        console.log('Submit form')
+        signInUseCase.execute(username, password)
     }
 
     function handleUsernameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -56,7 +62,7 @@ export function SignInForm() {
                     {errors.password && errors.password.type === "required" && (
                     <div role="passwordError" className="error">Password is required.</div>
                     )}
-                    
+
                     <div><input name="sigin" type="submit" value="Sign in" /></div>
                 </div>
             </form>            
