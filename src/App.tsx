@@ -1,15 +1,17 @@
 import React from 'react';
-import SignInUseCase from './user/application/sigin/SignInUseCase';
-import SigInForm from './user/component/signin/SignInForm'
+import SignInUseCase from './user/application/signin/SignInUseCase';
+import SignInForm from './user/component/signin/SignInForm'
+import AuthenticationServiceFactory from './user/domain/factories/AuthenticationServiceFactory';
+import StorageRepositoryFactory from './user/domain/factories/StorageRepositoryFactory';
 
 function App() {
-  const onSignIn = (username, password) => {
-    new SignInUseCase()
-    .execute({username}, {password})
-  }
+  const signInUseCase = new SignInUseCase(
+    AuthenticationServiceFactory.create(),
+    StorageRepositoryFactory.localStorage())
+    
   return (
     <div className="App">
-      <SigInForm />
+      <SignInForm signInUseCase={signInUseCase} />
     </div>
     
   );

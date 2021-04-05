@@ -1,3 +1,3 @@
 export default interface StorageRepository {
-    save: (key: string, value: string) => void
+    save(key: string, value: string): void
 }

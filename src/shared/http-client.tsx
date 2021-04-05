@@ -1,5 +1,4 @@
 import { ApplicationSettings } from "../configuration/application-settings";
-import { AuthenticationService } from "../login/services/authenticationService";
 
 export class HttpClient {
     public static async post<TResult>(resource: string, body: string): Promise<TResult> {
@@ -96,7 +95,7 @@ export class HttpClient {
     }
 
     private static GetHeaders(contentType: null | string = 'application/json'): Record<string, string> {
-        var token = AuthenticationService.getAccessToken();
+        var token = ''//AuthenticationService.getAccessToken();
 
         let headers: Record<string, string> = {};
 
