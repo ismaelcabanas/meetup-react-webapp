@@ -7,7 +7,7 @@ import StorageRepositoryFactory from './user/domain/factories/StorageRepositoryF
 function App() {
   const signInUseCase = new SignInUseCase(
     AuthenticationServiceFactory.create(),
-    StorageRepositoryFactory.localStorage())
+    StorageRepositoryFactory.localStorage(window.localStorage))
     
   return (
     <div className="App">
