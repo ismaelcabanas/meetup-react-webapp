@@ -2,6 +2,7 @@ import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Header, Grid, Message } from 'semantic-ui-react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignInUseCase from "../../application/signin/SignInUseCase";
 
 type LoginData = {
@@ -45,7 +46,7 @@ export function SignInForm(props: SignInFormProps) {
                                 id="username"
                                 name="username"
                                 type="text"
-                                placeholder="type your user name"
+                                placeholder="E-mail address"
                                 ref={register({required: true})} 
                                 onChange={handleUsernameChange}  />                
                             <i aria-hidden="true" className="user icon"></i>
