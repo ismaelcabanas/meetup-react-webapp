@@ -33,6 +33,12 @@ describe('Sign in form render page', () => {
         expect(getByLabelText(/password/i)).toBeInTheDocument();
     });
 
+    it('render sign up link', () => {
+        render(<SignInForm signInUseCase={mockSignInUseCase}/>)
+        
+        expect(screen.getByRole('link', {name: /sign up/i})).toBeInTheDocument();
+    });
+
     it("should be accessible", () => {
         const { container } = render(<SignInForm signInUseCase={mockSignInUseCase}/>)
 
