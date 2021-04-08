@@ -8,4 +8,10 @@ describe('Sign up form component', () => {
 
         expect(screen.getByRole('heading', {name: /sign up/i})).toBeInTheDocument()
     });
+
+    it('should renders the user name', () => {
+        render(<SignUpForm />)
+
+        expect(screen.getByPlaceholderText(/your name/i)).toBeInTheDocument();
+    });    
 });
