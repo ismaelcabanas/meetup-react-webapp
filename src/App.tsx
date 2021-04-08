@@ -1,17 +1,13 @@
 import React from 'react';
-import SignInUseCase from './user/application/signin/SignInUseCase';
-import SignInForm from './user/component/signin/SignInForm'
-import AuthenticationServiceFactory from './user/domain/factories/AuthenticationServiceFactory';
-import StorageRepositoryFactory from './user/domain/factories/StorageRepositoryFactory';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from "./Routes";
 
 function App() {
-  const signInUseCase = new SignInUseCase(
-    AuthenticationServiceFactory.create(),
-    StorageRepositoryFactory.localStorage(window.localStorage))
-    
   return (
     <div className="App">
-      <SignInForm signInUseCase={signInUseCase} />
+      <Router>
+        <Routes />     
+      </Router>            
     </div>
     
   );
