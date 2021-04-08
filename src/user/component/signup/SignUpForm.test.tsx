@@ -20,4 +20,10 @@ describe('Sign up form component', () => {
 
         expect(screen.getByPlaceholderText(/your email/i)).toBeInTheDocument();
     });        
+
+    it('should renders the user password', () => {
+        render(<SignUpForm />)
+
+        expect(screen.getByPlaceholderText(/your password/i)).toBeInTheDocument();
+    });            
 });

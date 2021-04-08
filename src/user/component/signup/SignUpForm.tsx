@@ -7,7 +7,7 @@ export function SignUpForm() {
             <h1>Sign Up</h1>
             <Form size="small">
                 <Form.Field>
-                    <label htmlFor="name">Your name: </label>   
+                    <label htmlFor="name">Name: </label>   
                     <div className="ui left icon input">                 
                         <input 
                             id="name"
@@ -18,7 +18,7 @@ export function SignUpForm() {
                     </div>                       
                 </Form.Field>
                 <Form.Field>
-                    <label htmlFor="email">Your email: </label>   
+                    <label htmlFor="email">Email: </label>   
                     <div className="ui left icon input">                 
                         <input 
                             id="email"
@@ -28,6 +28,17 @@ export function SignUpForm() {
                         <i aria-hidden="true" className="email icon"></i>
                     </div>                       
                 </Form.Field>                
+                <Form.Field>
+                    <label htmlFor="password">Password: </label>   
+                    <div className="ui left icon input">                 
+                        <input 
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Your password"  />                
+                        <i aria-hidden="true" className="lock icon"></i>
+                    </div>                       
+                </Form.Field>                                
             </Form>
         </Container>
     )
