@@ -3,7 +3,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from "jest-axe";
 import SignInForm from './SignInForm';
-import SignInUseCase from '../../application/sigin/SignInUseCase';
+import SignInUseCase from '../../application/signin/SignInUseCase'
 
 const mockSignInUseCase: SignInUseCase = {
     execute: jest.fn(),
