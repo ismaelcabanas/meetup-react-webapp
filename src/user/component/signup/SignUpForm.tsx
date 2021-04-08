@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Form, Button } from 'semantic-ui-react';
+import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
 
 export function SignUpForm() {
     return (
@@ -43,6 +43,9 @@ export function SignUpForm() {
                     <Button primary type='submit' name="signup">Sign up</Button>        
                 </Form.Field>                                                                                                        
             </Form>
+            <Message>
+                Have an account? <a role='link' href='/signin'>Sign In</a>
+            </Message>
         </Container>
     )
 }

@@ -31,5 +31,10 @@ describe('Sign up form component', () => {
         render(<SignUpForm />)
 
         expect(screen.getByRole('button', {name: /sign up/i})).toBeInTheDocument()
-    });                
+    });         
+    it('render sign up link', () => {
+        render(<SignUpForm />)
+        
+        expect(screen.getByRole('link', {name: /sign in/i})).toBeInTheDocument();
+    });           
 });
