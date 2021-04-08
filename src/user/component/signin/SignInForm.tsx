@@ -76,7 +76,7 @@ export function SignInForm(props: SignInFormProps) {
                         <Button primary type='submit' name="signin">Sign in</Button>        
                     </Form.Field>
                     <Message>
-                        Don't have an account? <a role='link' href='#'>Sign Up</a>
+                        Don't have an account? <a role='link' href='/signup'>Sign Up</a>
                     </Message>            
                 </Form>
             </Grid.Column>
