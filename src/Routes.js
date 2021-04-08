@@ -17,10 +17,10 @@ export default function Routes() {
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route exact path="/login">
+            <Route exact path="/signin">
                 <SignInForm signInUseCase={signInUseCase} />
             </Route>
-            <Route>
+            <Route exact path="/signup">
                 <SignUpForm />
             </Route>
         </Switch>

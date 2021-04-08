@@ -13,9 +13,7 @@ describe('Sign in form render page', () => {
     it('renders the sign in page', () => {
         render(<SignInForm signInUseCase={mockSignInUseCase}/>)
 
-        const signInText = screen.getByText("Sign in");
-
-        expect(signInText).toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: /sign in/i})).toBeInTheDocument()
     });
 
     it('renders a submit button', () => {

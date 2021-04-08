@@ -1,8 +1,7 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, Header, Grid, Message } from 'semantic-ui-react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Button, Form, Header, Grid, Card } from 'semantic-ui-react';
 import SignInUseCase from "../../application/signin/SignInUseCase";
 
 type LoginData = {
@@ -35,50 +34,52 @@ export function SignInForm(props: SignInFormProps) {
     return (
         <Grid centered columns={2} style={{ height: '100vh' }} verticalAlign="middle">
             <Grid.Column>
-                <Header as='h2' color='teal' textAlign='center'>
-                    Sign-in
-                </Header>
-                <Form size="small" onSubmit={handleSubmit(onSubmit)}>
-                    <Form.Field error={!!errors.username}>
-                        <label htmlFor="username">Username: </label>   
-                        <div className="ui left icon input">                 
-                            <input 
-                                id="username"
-                                name="username"
-                                type="text"
-                                placeholder="E-mail address"
-                                ref={register({required: true})} 
-                                onChange={handleUsernameChange}  />                
-                            <i aria-hidden="true" className="user icon"></i>
-                        </div>
-                        {errors.username && errors.username.type === "required" && (
-                            <span role="alert" className="errorMessage">Username is required.</span>
-                        )}    
-                    </Form.Field>
-                    <Form.Field error={!!errors.password}>
-                        <label htmlFor="password">Password: </label>
-                        <div className="ui left icon input">   
-                            <input 
-                                id="password"
-                                name="password"
-                                type="password" 
-                                autoComplete="password"
-                                placeholder="type your password"
-                                ref={register({required: true})} 
-                                onChange={handlePasswordChange}  />                
-                            <i aria-hidden="true" className="lock icon"></i>    
-                        </div>
-                        {errors.password && errors.password.type === "required" && (
-                            <span role="alert" className="errorMessage">Password is required.</span>
-                        )}
-                    </Form.Field>
-                    <Form.Field>
-                        <Button primary type='submit' name="signin">Sign in</Button>        
-                    </Form.Field>
-                    <Message>
-                        Don't have an account? <a role='link' href='/signup'>Sign Up</a>
-                    </Message>            
-                </Form>
+                <Card>
+                    <Card.Content>
+                        <Header as='h2' textAlign='center'>
+                            Sign In
+                        </Header>
+                        <Form size="small" onSubmit={handleSubmit(onSubmit)}>
+                            <Form.Field error={!!errors.username}>
+                                <label htmlFor="username">Username: </label>   
+                                <div className="ui left icon input">                 
+                                    <input 
+                                        id="username"
+                                        name="username"
+                                        type="text"
+                                        placeholder="Your email"
+                                        ref={register({required: true})} 
+                                        onChange={handleUsernameChange}  />                
+                                    <i aria-hidden="true" className="user icon"></i>
+                                </div>
+                                {errors.username && errors.username.type === "required" && (
+                                    <span role="alert" className="errorMessage">Username is required.</span>
+                                )}    
+                            </Form.Field>
+                            <Form.Field error={!!errors.password}>
+                                <label htmlFor="password">Password: </label>
+                                <div className="ui left icon input">   
+                                    <input 
+                                        id="password"
+                                        name="password"
+                                        type="password" 
+                                        autoComplete="password"
+                                        placeholder="Your password"
+                                        ref={register({required: true})} 
+                                        onChange={handlePasswordChange}  />                
+                                    <i aria-hidden="true" className="lock icon"></i>    
+                                </div>
+                                {errors.password && errors.password.type === "required" && (
+                                    <span role="alert" className="errorMessage">Password is required.</span>
+                                )}
+                            </Form.Field>
+                            <Form.Field>
+                                <Button primary type='submit' name="signin">Sign in</Button>        
+                            </Form.Field>
+                            Don't have an account? <a role='link' href='/signup'>Sign Up</a>                        
+                        </Form>
+                    </Card.Content>
+                </Card>
             </Grid.Column>
         </Grid>
     )
