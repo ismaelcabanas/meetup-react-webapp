@@ -17,6 +17,17 @@ export function SignUpForm() {
                         <i aria-hidden="true" className="user icon"></i>
                     </div>                       
                 </Form.Field>
+                <Form.Field>
+                    <label htmlFor="email">Your email: </label>   
+                    <div className="ui left icon input">                 
+                        <input 
+                            id="email"
+                            name="email"
+                            type="text"
+                            placeholder="Your email"  />                
+                        <i aria-hidden="true" className="email icon"></i>
+                    </div>                       
+                </Form.Field>                
             </Form>
         </Container>
     )
