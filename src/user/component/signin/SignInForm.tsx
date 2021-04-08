@@ -34,7 +34,7 @@ export function SignInForm(props: SignInFormProps) {
     return (
         <Grid centered columns={2} style={{ height: '100vh' }} verticalAlign="middle">
             <Grid.Column>
-                <Card>
+                <Card centered>
                     <Card.Content>
                         <Header as='h2' textAlign='center'>
                             Sign In
@@ -74,7 +74,7 @@ export function SignInForm(props: SignInFormProps) {
                                 )}
                             </Form.Field>
                             <Form.Field>
-                                <Button primary type='submit' name="signin">Sign in</Button>        
+                                <Button primary type='submit' name="signin">Sign In</Button>        
                             </Form.Field>
                             Don't have an account? <a role='link' href='/signup'>Sign Up</a>                        
                         </Form>

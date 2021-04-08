@@ -5,7 +5,7 @@ export function SignUpForm() {
     return (
         <Grid centered columns={2} style={{ height: '100vh' }} verticalAlign="middle">
             <Grid.Column>                
-                <Card>
+                <Card centered>
                     <Card.Content>
                         <Header as='h2' textAlign='center'>
                             Sign Up
@@ -44,7 +44,7 @@ export function SignUpForm() {
                                 </div>                       
                             </Form.Field>      
                             <Form.Field>
-                                <Button primary type='submit' name="signup">Sign up</Button>        
+                                <Button primary type='submit' name="signup">Sign Up</Button>        
                             </Form.Field>                                                                                               
                             Have an account? <a role='link' href='/signin'>Sign In</a>
                                                 
