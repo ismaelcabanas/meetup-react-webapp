@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Form } from 'semantic-ui-react';
+import { Container, Header, Form, Button } from 'semantic-ui-react';
 
 export function SignUpForm() {
     return (
@@ -38,7 +38,10 @@ export function SignUpForm() {
                             placeholder="Your password"  />                
                         <i aria-hidden="true" className="lock icon"></i>
                     </div>                       
-                </Form.Field>                                
+                </Form.Field>      
+                <Form.Field>
+                    <Button primary type='submit' name="signup">Sign up</Button>        
+                </Form.Field>                                                                                                        
             </Form>
         </Container>
     )

@@ -26,4 +26,10 @@ describe('Sign up form component', () => {
 
         expect(screen.getByPlaceholderText(/your password/i)).toBeInTheDocument();
     });            
+
+    it('should renders the signup button', () => {
+        render(<SignUpForm />)
+
+        expect(screen.getByRole('button', {name: /sign up/i})).toBeInTheDocument()
+    });                
 });
