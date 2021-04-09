@@ -6,6 +6,7 @@ import SignInForm from './user/component/signin/SignInForm'
 import SignUpForm from "./user/component/signup/SignUpForm";
 import AuthenticationServiceFactory from './user/domain/factories/AuthenticationServiceFactory';
 import StorageRepositoryFactory from './user/domain/factories/StorageRepositoryFactory';
+import ProtectedRoute from './ProtectedRoute'
 
 export default function Routes() {
     const signInUseCase = new SignInUseCase(
@@ -14,15 +15,11 @@ export default function Routes() {
 
     return (
         <Switch>
-            <Route exact path="/">
-                <Home />
-            </Route>
+            <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/signin">
                 <SignInForm signInUseCase={signInUseCase} />
             </Route>
-            <Route exact path="/signup">
-                <SignUpForm />
-            </Route>
+            <Route exact path="/signup" component={SignUpForm} />
         </Switch>
     );
 }
