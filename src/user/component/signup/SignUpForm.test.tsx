@@ -9,11 +9,17 @@ describe('Sign up form component', () => {
         expect(screen.getByRole('heading', {name: /sign up/i})).toBeInTheDocument()
     });
 
-    it('should renders the user name', () => {
+    it('should renders the user first name', () => {
         render(<SignUpForm />)
 
-        expect(screen.getByPlaceholderText(/your name/i)).toBeInTheDocument();
-    });    
+        expect(screen.getByPlaceholderText(/your first name/i)).toBeInTheDocument();
+    });   
+    
+    it('should renders the user last name', () => {
+        render(<SignUpForm />)
+
+        expect(screen.getByPlaceholderText(/your last name/i)).toBeInTheDocument();
+    });   
 
     it('should renders the user email', () => {
         render(<SignUpForm />)

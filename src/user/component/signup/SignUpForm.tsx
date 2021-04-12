@@ -12,13 +12,23 @@ export function SignUpForm() {
                         </Header>
                         <Form size="small">
                             <Form.Field>
-                                <label htmlFor="name">Name: </label>   
+                                <label htmlFor="firstName">First name: </label>   
                                 <div>                 
                                     <input 
-                                        id="name"
-                                        name="name"
+                                        id="firstName"
+                                        name="firstName"
                                         type="text"
-                                        placeholder="Your name"  />                
+                                        placeholder="Your first name"  />                
+                                </div>                       
+                            </Form.Field>
+                            <Form.Field>
+                                <label htmlFor="lastName">Last name: </label>   
+                                <div>                 
+                                    <input 
+                                        id="lastName"
+                                        name="lastName"
+                                        type="text"
+                                        placeholder="Your last name"  />                
                                 </div>                       
                             </Form.Field>
                             <Form.Field>
