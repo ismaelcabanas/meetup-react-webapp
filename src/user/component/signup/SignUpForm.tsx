@@ -46,7 +46,7 @@ export function SignUpForm() {
                             <Form.Field>
                                 <Button primary type='submit' name="signup">Sign Up</Button>        
                             </Form.Field>                                                                                               
-                            Have an account? <a role='link' href='/signin'>Sign In</a>
+                            Have an account? <a href='/signin'>Sign In</a>
                                                 
                         </Form>                            
                     </Card.Content>    

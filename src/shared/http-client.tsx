@@ -95,7 +95,7 @@ export class HttpClient {
     }
 
     private static GetHeaders(contentType: null | string = 'application/json'): Record<string, string> {
-        var token = ''//AuthenticationService.getAccessToken();
+        var token = null; //AuthenticationService.getAccessToken();
 
         let headers: Record<string, string> = {};
 

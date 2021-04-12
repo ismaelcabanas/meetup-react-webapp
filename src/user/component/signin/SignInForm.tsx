@@ -1,26 +1,31 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Form, Header, Grid, Card } from 'semantic-ui-react';
-import SignInUseCase from "../../application/signin/SignInUseCase";
+import { Button, Form, Header, Grid, Card, Message } from 'semantic-ui-react';
+import { authenticate } from '../../service/Authenticator'
 
 type LoginData = {
     username: string;
     password: string;
 };
 
-interface SignInFormProps {
-    signInUseCase: SignInUseCase
-}
-
-export function SignInForm(props: SignInFormProps) {
+export function SignInForm() {
     const { register, errors, handleSubmit } = useForm<LoginData>();
-    const { signInUseCase } = props
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [authenticationErrorMessage, setAuthenticationErrorMessage] = useState<string | null>(null);
     
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        signInUseCase.execute(username, password)
+        authenticate(username, password)
+            .then(data => {
+                window.localStorage.setItem('accessToken', data.access_token)
+                window.localStorage.setItem('username', username)
+                document.location.href = '/';
+            })
+            .catch(error => {
+                console.log(error)
+                setAuthenticationErrorMessage("Invalid user credentials.")    
+            })
     }
 
     function handleUsernameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -73,10 +78,13 @@ export function SignInForm(props: SignInFormProps) {
                                     <span role="alert" className="errorMessage">Password is required.</span>
                                 )}
                             </Form.Field>
+                            {authenticationErrorMessage != null && (
+                                <Message color='red'>Invalid user credentials.</Message>
+                            )}                            
                             <Form.Field>
                                 <Button primary type='submit' name="signin">Sign In</Button>        
                             </Form.Field>
-                            Don't have an account? <a role='link' href='/signup'>Sign Up</a>                        
+                            Don't have an account? <a href='/signup'>Sign Up</a>                        
                         </Form>
                     </Card.Content>
                 </Card>
