@@ -83,12 +83,18 @@ export function SignUpForm() {
                                         name="email"
                                         type="text"
                                         placeholder="Your email" 
-                                        ref={register({required: true})} 
+                                        ref={register({
+                                            required: "Email is required.",
+                                            pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                                message: "Invalid email address."
+                                            }
+                                        })} 
                                         onChange={handleEmailChange}  />                
                                     <i aria-hidden="true" className="user icon"></i>
                                 </div>
-                                {errors.email && errors.email.type === "required" && (
-                                    <span role="alert" className="errorMessage">Email is required.</span>
+                                {errors.email && (
+                                    <span role="alert" className="errorMessage">{errors.email.message}</span>
                                 )}                       
                             </Form.Field>                
                             <Form.Field>

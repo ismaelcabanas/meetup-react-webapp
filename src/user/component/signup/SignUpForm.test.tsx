@@ -97,5 +97,18 @@ describe('Sign up form component', () => {
             
             expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
         });
+
+        it('should display an error message when the user submits invalid email', async () => {
+            render(<SignUpForm />)
+    
+            userEvent.type(screen.getByLabelText(/email/i), 'test');
+            
+            const signUpButton = screen.getByRole('button', {name: /sign up/i});
+            await act (async () => {
+                userEvent.click(signUpButton);
+            });
+            
+            expect(await screen.findByText(/Invalid email address./)).toBeInTheDocument();        
+        });
     });
 });
