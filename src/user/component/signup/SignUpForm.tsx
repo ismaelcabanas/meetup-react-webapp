@@ -5,13 +5,15 @@ import { useForm } from "react-hook-form";
 
 interface SignUpData {
     firstName: string,
-    lastName: string
+    lastName: string,
+    email: string
 }
 
 export function SignUpForm() {
-    const { register, errors, handleSubmit } = useForm<SignUpData>();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const { register, errors, handleSubmit } = useForm<SignUpData>()
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
     }
@@ -22,6 +24,10 @@ export function SignUpForm() {
 
     function handleLastNameChange(event: ChangeEvent<HTMLInputElement>) {
         setLastName(event.target.value)
+    }
+
+    function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
+        setEmail(event.target.value)
     }
 
     return (
@@ -70,9 +76,14 @@ export function SignUpForm() {
                                         id="email"
                                         name="email"
                                         type="text"
-                                        placeholder="Your email"  />                
+                                        placeholder="Your email" 
+                                        ref={register({required: true})} 
+                                        onChange={handleEmailChange}  />                
                                     <i aria-hidden="true" className="user icon"></i>
-                                </div>                       
+                                </div>
+                                {errors.email && errors.email.type === "required" && (
+                                    <span role="alert" className="errorMessage">Email is required.</span>
+                                )}                       
                             </Form.Field>                
                             <Form.Field>
                                 <label htmlFor="password">Password: </label>   
