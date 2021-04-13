@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 interface SignUpData {
     firstName: string,
     lastName: string,
-    email: string
+    email: string,
+    password: string
 }
 
 export function SignUpForm() {
@@ -14,6 +15,7 @@ export function SignUpForm() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
     }
@@ -28,6 +30,10 @@ export function SignUpForm() {
 
     function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value)
+    }
+
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
+        setPassword(event.target.value)
     }
 
     return (
@@ -92,9 +98,14 @@ export function SignUpForm() {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        placeholder="Your password"  />                
+                                        placeholder="Your password"
+                                        ref={register({required: true})}
+                                        onChange={handlePasswordChange}  />                
                                     <i aria-hidden="true" className="lock icon"></i>
-                                </div>                       
+                                </div>  
+                                {errors.password && errors.password.type === "required" && (
+                                    <span role="alert" className="errorMessage">Password is required.</span>
+                                )}                     
                             </Form.Field>      
                             <Form.Field>
                                 <Button primary type='submit' name="signup">Sign Up</Button>        

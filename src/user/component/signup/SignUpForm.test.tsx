@@ -84,5 +84,18 @@ describe('Sign up form component', () => {
             
             expect(await screen.findByText(/Email is required./)).toBeInTheDocument();        
         });
+
+        it('should display an error message when the user submits empty password', async () => {
+            render(<SignUpForm />)
+    
+            userEvent.type(screen.getByLabelText(/password/i), '');
+            
+            const signUpButton = screen.getByRole('button', {name: /sign up/i});
+            await act (async () => {
+                userEvent.click(signUpButton);
+            });
+            
+            expect(await screen.findByText(/Password is required./)).toBeInTheDocument();        
+        });
     });
 });
