@@ -1,5 +1,6 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event';
 import SignUpForm from './SignUpForm'
 
 describe('Sign up form component', () => {    
@@ -42,5 +43,20 @@ describe('Sign up form component', () => {
         render(<SignUpForm />)
         
         expect(screen.getByRole('link', {name: /sign in/i})).toBeInTheDocument();
-    });           
+    });  
+    
+    describe("when submit invalid data", () => {
+        it('should display an error message when the user submits empty first name', async () => {
+            render(<SignUpForm />)
+    
+            userEvent.type(screen.getByLabelText(/first name/i), '');
+            
+            const signUpButton = screen.getByRole('button', {name: /sign up/i});
+            await act (async () => {
+                userEvent.click(signUpButton);
+            });
+            
+            expect(await screen.findByText(/First name is required./)).toBeInTheDocument();        
+        });
+    });
 });

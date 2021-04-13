@@ -1,7 +1,23 @@
 import React from 'react'
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Grid, Header, Form, Button, Card } from 'semantic-ui-react';
+import { useForm } from "react-hook-form";
+
+interface SignUpData {
+    firstName: string
+}
 
 export function SignUpForm() {
+    const { register, errors, handleSubmit } = useForm<SignUpData>();
+    const [firstName, setFirstName] = useState('');
+
+    function onSubmit(event: FormEvent<HTMLFormElement>) {
+    }
+
+    function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {
+        setFirstName(event.target.value)
+    }
+
     return (
         <Grid centered columns={2} style={{ height: '100vh' }} verticalAlign="middle">
             <Grid.Column>                
@@ -10,7 +26,7 @@ export function SignUpForm() {
                         <Header as='h2' textAlign='center'>
                             Sign Up
                         </Header>
-                        <Form size="small">
+                        <Form size="small" onSubmit={handleSubmit(onSubmit)}>
                             <Form.Field>
                                 <label htmlFor="firstName">First name: </label>   
                                 <div>                 
@@ -18,8 +34,13 @@ export function SignUpForm() {
                                         id="firstName"
                                         name="firstName"
                                         type="text"
-                                        placeholder="Your first name"  />                
-                                </div>                       
+                                        placeholder="Your first name"
+                                        ref={register({required: true})} 
+                                        onChange={handleFirstNameChange}  />                
+                                </div> 
+                                {errors.firstName && errors.firstName.type === "required" && (
+                                    <span role="alert" className="errorMessage">First name is required.</span>
+                                )}                       
                             </Form.Field>
                             <Form.Field>
                                 <label htmlFor="lastName">Last name: </label>   
