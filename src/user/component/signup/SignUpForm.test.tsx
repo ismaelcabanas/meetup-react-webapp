@@ -58,5 +58,18 @@ describe('Sign up form component', () => {
             
             expect(await screen.findByText(/First name is required./)).toBeInTheDocument();        
         });
+
+        it('should display an error message when the user submits empty last name', async () => {
+            render(<SignUpForm />)
+    
+            userEvent.type(screen.getByLabelText(/last name/i), '');
+            
+            const signUpButton = screen.getByRole('button', {name: /sign up/i});
+            await act (async () => {
+                userEvent.click(signUpButton);
+            });
+            
+            expect(await screen.findByText(/Last name is required./)).toBeInTheDocument();        
+        });
     });
 });

@@ -4,18 +4,24 @@ import { Grid, Header, Form, Button, Card } from 'semantic-ui-react';
 import { useForm } from "react-hook-form";
 
 interface SignUpData {
-    firstName: string
+    firstName: string,
+    lastName: string
 }
 
 export function SignUpForm() {
     const { register, errors, handleSubmit } = useForm<SignUpData>();
     const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
     }
 
     function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {
         setFirstName(event.target.value)
+    }
+
+    function handleLastNameChange(event: ChangeEvent<HTMLInputElement>) {
+        setLastName(event.target.value)
     }
 
     return (
@@ -49,8 +55,13 @@ export function SignUpForm() {
                                         id="lastName"
                                         name="lastName"
                                         type="text"
-                                        placeholder="Your last name"  />                
-                                </div>                       
+                                        placeholder="Your last name"
+                                        ref={register({required: true})} 
+                                        onChange={handleLastNameChange}  />                
+                                </div>   
+                                {errors.lastName && errors.lastName.type === "required" && (
+                                    <span role="alert" className="errorMessage">Last name is required.</span>
+                                )}                    
                             </Form.Field>
                             <Form.Field>
                                 <label htmlFor="email">Email: </label>   
