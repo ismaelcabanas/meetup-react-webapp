@@ -43,9 +43,12 @@ export function SignUpForm() {
             <Grid.Column>                
                 <Card centered>
                     {successMessage !== null &&
-                        <Message
-                            success
-                            header={successMessage} />
+                        <Message success>
+                            <Message.Header>{successMessage}</Message.Header>                        
+                            <p>
+                                You can <a href='/signin'>Sign In</a>.
+                            </p>
+                        </Message>                            
                     }
                     {successMessage === null &&
                         <Card.Content>                                           
