@@ -111,4 +111,23 @@ describe('Sign up form component', () => {
             expect(await screen.findByText(/Invalid email address./)).toBeInTheDocument();        
         });
     });
+
+    describe("when sign up successfully", () => {
+        it('should display confirmation message', async () => {
+            render(<SignUpForm />)
+    
+            userEvent.type(screen.getByLabelText(/first name/i), 'some first name');
+            userEvent.type(screen.getByLabelText(/last name/i), 'some last name');
+            userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
+            userEvent.type(screen.getByLabelText(/password/i), 'some password');
+            
+            const signUpButton = screen.getByRole('button', {name: /sign up/i});
+            await act (async () => {
+                userEvent.click(signUpButton);
+            });
+            
+            expect(await screen.findByText(/Registration success./)).toBeInTheDocument(); 
+            expect(screen.queryByRole('heading', {name: /sign up/i})).not.toBeInTheDocument()       
+        });               
+    });
 });
