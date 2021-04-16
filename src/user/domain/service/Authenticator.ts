@@ -1,5 +1,5 @@
-import { HttpClient } from "../../shared/http-client";
-import { AuthenticationResult } from "../domain/AuthenticationResult";
+import { HttpClient } from "../../../shared/http-client";
+import { AuthenticationResult } from "../../domain/AuthenticationResult";
 
 interface AuthenticationRequest {
     username: string,

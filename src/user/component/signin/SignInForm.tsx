@@ -2,7 +2,7 @@ import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Header, Grid, Card, Message } from 'semantic-ui-react';
-import { authenticate } from '../../service/Authenticator'
+import { authenticate } from '../../domain/service/Authenticator'
 
 type LoginData = {
     username: string;
@@ -23,7 +23,6 @@ export function SignInForm() {
                 document.location.href = '/';
             })
             .catch(error => {
-                console.log(error)
                 setAuthenticationErrorMessage("Invalid user credentials.")    
             })
     }

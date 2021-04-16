@@ -3,9 +3,9 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from "jest-axe";
 import SignInForm from './SignInForm';
-import { authenticate } from '../../service/Authenticator'
+import { authenticate } from '../../domain/service/Authenticator'
 
-jest.mock("../../service/Authenticator")
+jest.mock("../../domain/service/Authenticator")
 
 describe("SignIn component", () => {
     it('should renders the sign in page', () => {
