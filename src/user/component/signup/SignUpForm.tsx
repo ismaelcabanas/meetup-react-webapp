@@ -2,6 +2,8 @@ import React from 'react'
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Grid, Header, Form, Button, Card, Message } from 'semantic-ui-react';
 import { useForm } from "react-hook-form";
+import { create } from '../../domain/repository/UserRegistrationRepository'
+import CreateUserRegistrationRequest from '../../domain/repository/CreateUserRegistrationRequest'
 
 interface SignUpData {
     firstName: string,
@@ -19,7 +21,14 @@ export function SignUpForm() {
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        setSuccessMessage("Registration success.")
+        const request: CreateUserRegistrationRequest = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        }
+        create(request)
+            .then(() => setSuccessMessage("Registration success."))        
     }
 
     function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {

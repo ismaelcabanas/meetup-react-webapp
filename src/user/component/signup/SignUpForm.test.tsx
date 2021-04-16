@@ -2,6 +2,9 @@ import React from 'react'
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import SignUpForm from './SignUpForm'
+import { create as createUserRegistration } from '../../domain/repository/UserRegistrationRepository' 
+
+jest.mock("../../domain/repository/UserRegistrationRepository")
 
 describe('Sign up form component', () => {    
     it('should renders the header', () => {
@@ -114,35 +117,37 @@ describe('Sign up form component', () => {
 
     describe("when sign up successfully", () => {
         it('should display confirmation message', async () => {
-            render(<SignUpForm />)
-    
+            createUserRegistration.mockResolvedValueOnce()
+            render(<SignUpForm />)    
             userEvent.type(screen.getByLabelText(/first name/i), 'some first name');
             userEvent.type(screen.getByLabelText(/last name/i), 'some last name');
             userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
-            userEvent.type(screen.getByLabelText(/password/i), 'some password');
-            
+            userEvent.type(screen.getByLabelText(/password/i), 'some password');            
             const signUpButton = screen.getByRole('button', {name: /sign up/i});
+
             await act (async () => {
                 userEvent.click(signUpButton);
             });
             
+            expect(createUserRegistration).toHaveBeenCalled()
             expect(await screen.findByText(/Registration success./)).toBeInTheDocument(); 
             expect(screen.queryByRole('heading', {name: /sign up/i})).not.toBeInTheDocument()       
         });        
         
         it('should display link to home', async () => {
-            render(<SignUpForm />)
-    
+            createUserRegistration.mockResolvedValueOnce()
+            render(<SignUpForm />)    
             userEvent.type(screen.getByLabelText(/first name/i), 'some first name');
             userEvent.type(screen.getByLabelText(/last name/i), 'some last name');
             userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
-            userEvent.type(screen.getByLabelText(/password/i), 'some password');
-            
+            userEvent.type(screen.getByLabelText(/password/i), 'some password');            
             const signUpButton = screen.getByRole('button', {name: /sign up/i});
+
             await act (async () => {
                 userEvent.click(signUpButton);
             });
             
+            expect(createUserRegistration).toHaveBeenCalled()
             expect(screen.getByRole('link', {name: /sign in/i})).toBeInTheDocument();
         });     
     });
