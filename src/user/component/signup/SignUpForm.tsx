@@ -19,6 +19,7 @@ export function SignUpForm() {
     const [email, setEmail] = useState<string | null>(null)
     const [password, setPassword] = useState<string | null>(null)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
         const request: CreateUserRegistrationRequest = {
@@ -28,7 +29,8 @@ export function SignUpForm() {
             password: password
         }
         create(request)
-            .then(() => setSuccessMessage("Registration success."))        
+            .then(() => setSuccessMessage("Registration success."))    
+            .catch(() => setErrorMessage("Error during registration."))    
     }
 
     function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -58,6 +60,11 @@ export function SignUpForm() {
                                 You can <a href='/signin'>Sign In</a>.
                             </p>
                         </Message>                            
+                    }
+                    {errorMessage !== null &&
+                        <Message error>
+                            <Message.Header>{errorMessage}</Message.Header>
+                        </Message>
                     }
                     {successMessage === null &&
                         <Card.Content>                                           
