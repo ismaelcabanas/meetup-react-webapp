@@ -3,6 +3,7 @@ import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import SignUpForm from './SignUpForm'
 import { create as createUserRegistration } from '../../domain/repository/UserRegistrationRepository' 
+import CreateUserRegistrationRequest from '../../domain/repository/CreateUserRegistrationRequest'
 
 jest.mock("../../domain/repository/UserRegistrationRepository")
 
@@ -129,7 +130,9 @@ describe('Sign up form component', () => {
                 userEvent.click(signUpButton);
             });
             
-            expect(createUserRegistration).toHaveBeenCalled()
+            const expectedRequest = 
+                new CreateUserRegistrationRequest('some first name', 'some last name', 'test@test.com', 'some password')            
+            expect(createUserRegistration).toHaveBeenCalledWith(expectedRequest)
             expect(await screen.findByText(/Registration success./)).toBeInTheDocument(); 
             expect(screen.queryByRole('heading', {name: /sign up/i})).not.toBeInTheDocument()       
         });        

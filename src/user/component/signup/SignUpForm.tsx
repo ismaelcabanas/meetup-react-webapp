@@ -22,12 +22,13 @@ export function SignUpForm() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-        const request: CreateUserRegistrationRequest = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        }
+        const request = new CreateUserRegistrationRequest(
+            firstName,
+            lastName,
+            email,
+            password
+        )
+            
         create(request)
             .then(() => setSuccessMessage("Registration success."))    
             .catch(() => setErrorMessage("Error during registration."))    
