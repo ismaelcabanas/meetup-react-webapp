@@ -147,7 +147,6 @@ describe('Sign up form component', () => {
                 userEvent.click(signUpButton);
             });
             
-            expect(createUserRegistration).toHaveBeenCalled()
             expect(screen.getByRole('link', {name: /sign in/i})).toBeInTheDocument();
         });     
     });
@@ -167,7 +166,6 @@ describe('Sign up form component', () => {
                 userEvent.click(signUpButton);
             });
 
-            expect(createUserRegistration).toHaveBeenCalled()
             expect(await screen.findByText(/Error during registration./)).toBeInTheDocument()
             expect(screen.queryByRole('heading', {name: /sign up/i})).toBeInTheDocument()        
         });        
