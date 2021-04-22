@@ -14,7 +14,7 @@ export class HttpClient {
         var url = ApplicationSettings.API_URL + resource;
 
         const response = await fetch(url, requestOptions);
-        if (response.status === 200) {
+        if (response.ok) {
             return Promise.resolve(response as any);
         }
         else {
@@ -35,7 +35,7 @@ export class HttpClient {
         var url = ApplicationSettings.API_URL + resource;
 
         const response = await fetch(url, requestOptions);
-        if (response.status === 200) {
+        if (response.ok) {
             return Promise.resolve(response.json());
         }
         else {
@@ -55,7 +55,7 @@ export class HttpClient {
         var url = ApplicationSettings.API_URL + resource;
 
         const response = await fetch(url, requestOptions);
-        if (response.status === 200) {
+        if (response.ok) {
             if (response.bodyUsed) {
                 return Promise.resolve(response.json());
             }
