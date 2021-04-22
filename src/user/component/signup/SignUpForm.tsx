@@ -31,7 +31,7 @@ export function SignUpForm() {
             
         create(request)
             .then(() => setSuccessMessage("Registration success."))    
-            .catch(() => setErrorMessage("Error during registration."))    
+            .catch((error) => {console.log(error); setErrorMessage("Error during registration.")})    
     }
 
     function handleFirstNameChange(event: ChangeEvent<HTMLInputElement>) {
