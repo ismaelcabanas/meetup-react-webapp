@@ -10,5 +10,5 @@ export async function authenticate(username: string, password: string): Promise<
         username: username,
         password: password
     }
-    return HttpClient.post('/users/authenticate', JSON.stringify(request))
+    return HttpClient.post('/v1/users', JSON.stringify(request))
 }
